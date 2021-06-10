@@ -52,7 +52,9 @@ function App() {
         <div className="center">
           <img className="img" src={logo} alt="logo" />
           {content}
-          <button onClick={fetchData}>Get a Quote</button>
+          <button className="btn" onClick={fetchData}>
+            Get a Quote
+          </button>
         </div>
       </section>
     </Container>
@@ -62,7 +64,7 @@ function App() {
 export default App;
 
 const Container = styled.main`
-  background: rgb(0, 125, 53);
+  background: var(--primary-500);
   .center {
     display: flex;
     flex-direction: column;
@@ -72,25 +74,5 @@ const Container = styled.main`
 
   img {
     width: 200px;
-  }
-
-  button {
-    background: -webkit-linear-gradient(
-      top left,
-      #007d35 0%,
-      #007d35 40%,
-      #0f574e 100%
-    );
-    color: var(--white);
-    margin-top: 2rem;
-    margin-bottom: 0.5rem;
-    padding: 1rem 3rem;
-    font-size: 1.6rem;
-    border: 2px solid black;
-    transition: var(--transition);
-    &:hover {
-      opacity: 0.8;
-      cursor: pointer;
-    }
   }
 `;

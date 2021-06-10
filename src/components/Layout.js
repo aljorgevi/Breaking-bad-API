@@ -10,9 +10,9 @@ const GlobalStyle = createGlobalStyle`
 
 :root {
   /* colors */
-  --primary-100: #e2e0ff;
-  --primary-500: #645cff;
-  --primary-900: #141233;
+  --primary-100: #cce5d7;
+  --primary-500: rgb(0, 125, 53);
+  --primary-900: #003215;
 
   /* grey */
   --grey-50: #f8fafc;
@@ -142,16 +142,24 @@ Btns
 
 .btn {
   cursor: pointer;
-  color: var(--white);
-  background: var(--primary-500);
-  border: transparent;
-  border-radius: var(--borderRadius);
-  letter-spacing: var(--letterSpacing);
-  padding: 0.375rem 0.75rem;
-  box-shadow: var(--shadow-1);
-  transition: var(--transtion);
-  text-transform: capitalize;
-  display: inline-block;
+  background: -webkit-linear-gradient(
+      top left,
+      #007d35 0%,
+      #007d35 40%,
+      #0f574e 100%
+    );
+    color: var(--white);
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    padding: 1rem 3rem;
+    font-size: 1.6rem;
+    border: 2px solid black;
+    transition: var(--transition);
+}
+
+.btn:hover {
+  opacity: 0.8;
+  box-shadow: var(--shadow-3);
 }
 
 .btn-block {
