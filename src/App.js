@@ -8,7 +8,7 @@ const url = 'https://breaking-bad-quotes.herokuapp.com/v1/quotes';
 
 function App() {
   const [quote, setQuote] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const fetchData = useCallback(async () => {
@@ -43,7 +43,7 @@ function App() {
   }
 
   if (isLoading) {
-    <Loading />;
+    content = <Loading />;
   }
 
   return (
