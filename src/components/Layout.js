@@ -1,3 +1,7 @@
+import React from 'react';
+import { createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
 *,
 ::after,
 ::before {
@@ -281,3 +285,17 @@ Loader
     transform: translate(24px, 0);
   }
 }
+
+
+`;
+
+const Layout = ({ children }) => {
+  return (
+    <React.Fragment>
+      <GlobalStyle />
+      <main>{children}</main>
+    </React.Fragment>
+  );
+};
+
+export default Layout;

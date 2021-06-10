@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import logo from './logo.svg';
 import styled from 'styled-components';
-import QuoteList from './components/QuoteList';
+import Phrase from './components/Quote';
 import Loading from './components/Loading';
 
 const url = 'https://breaking-bad-quotes.herokuapp.com/v1/quotes';
 
 function App() {
-  const [quote, setQuote] = useState('');
+  const [Quote, setQuote] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [Error, setError] = useState(null);
 
   const fetchData = useCallback(async () => {
     setIsLoading(true);
@@ -22,8 +22,8 @@ function App() {
       }
       const data = await response.json();
       setQuote(data[0]);
-    } catch (error) {
-      setError(error.message);
+    } catch (err) {
+      setError(err.message);
     }
     setIsLoading(false);
   }, []);
@@ -34,12 +34,12 @@ function App() {
 
   let content;
 
-  if (quote) {
-    content = <QuoteList data={quote} />;
+  if (Quote) {
+    content = <Phrase data={Quote} />;
   }
 
-  if (error) {
-    content = <p className="alert alert-danger">{error}</p>;
+  if (Error) {
+    content = <p className="alert alert-danger">{Error}</p>;
   }
 
   if (isLoading) {
