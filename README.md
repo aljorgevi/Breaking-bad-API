@@ -2,7 +2,7 @@
 
 ## Website for fans of Braking Bad Serie!
 
-Hi there! 👋  This is the repo is a simple random quotes generator of you favorite serie, breadking bad!.
+Hi there! 👋  This is the repo of a simple random quotes generator site of you favorite serie, breadking bad!.
 It was developed using React, Fetch API and the [breaking-bad-quotes](https://breaking-bad-quotes.herokuapp.com/v1/quotes) API. The site is hosted on Netlify.
 
 ### Link [Live View](https://bd-quotes.netlify.app)
