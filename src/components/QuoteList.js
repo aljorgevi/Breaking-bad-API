@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 const QuoteList = ({ data }) => {
   if (Object.keys(data).length === 0) return null;
+
   return (
     <Container>
       <h1>{data.quote}</h1>
@@ -14,39 +15,18 @@ const QuoteList = ({ data }) => {
 export default QuoteList;
 
 const Container = styled.div`
-  padding: 3rem;
-  border-radius: 0.5rem;
-  background-color: #fff;
-  max-width: 300px;
+  padding: 1.5rem;
+  border-radius: var(--borderRadius);
+  background-color: var(--white);
+  max-width: 95%;
   margin-top: 2rem;
 
-  @media (min-width: 410px) {
-    max-width: 400px;
-  }
-  @media (min-width: 576px) {
-    margin-top: 3rem;
-    max-width: 500px;
-  }
-  @media (min-width: 768px) {
-    max-width: 700px;
-  }
-  @media (min-width: 992px) {
-    margin-top: 3rem;
-    max-width: 800px;
-  }
   h1 {
     font-family: Ariel, Helvetica, sans-serif;
     text-align: center;
     position: relative;
     padding-left: 2.5rem;
-    font-size: 1.4rem;
-    @media (min-width: 576px) {
-      font-size: 1.8rem;
-    }
-    @media (min-width: 992px) {
-      padding-left: 4rem;
-    }
-
+    font-size: 16px;
     &::before {
       content: open-quote;
       font-size: 7rem;
@@ -61,9 +41,20 @@ const Container = styled.div`
   }
   p {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1.6rem;
+    font-size: 14px;
     text-align: right;
-    color: #666;
+    color: var(--grey-500);
     margin-top: 2rem;
+  }
+
+  @media (min-width: 992px) {
+    padding: 3rem;
+    max-width: 75%;
+    h1 {
+      font-size: 21px;
+    }
+    p {
+      font-size: 18px;
+    }
   }
 `;

@@ -1,83 +1,96 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import logo from './logo.svg';
-// import styled from '@emotion/styled';
 import styled from 'styled-components';
 import QuoteList from './components/QuoteList';
+import Loading from './components/Loading';
+
+const url = 'https://breaking-bad-quotes.herokuapp.com/v1/quotes';
 
 function App() {
-  const [quote, setQuote] = useState({});
+  const [quote, setQuote] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const fetchData = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Something went wrong!');
+      }
+      const data = await response.json();
+      setQuote(data[0]);
+    } catch (error) {
+      setError(error.message);
+    }
+    setIsLoading(false);
+  }, []);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
-  const fetchData = async () => {
-    const URL_API = 'https://breaking-bad-quotes.herokuapp.com/v1/quotes';
+  let content;
 
-    const response = await fetch(URL_API);
-    const data = await response.json();
-    setQuote(data[0]);
-  };
+  if (quote) {
+    content = <QuoteList data={quote} />;
+  }
+
+  if (error) {
+    content = <p className="alert alert-danger">{error}</p>;
+  }
+
+  if (isLoading) {
+    <Loading />;
+  }
+
   return (
-    <Contenedor>
-      <Wrapper src={logo} alt="" />
-      <QuoteList data={quote} />
-      <Boton onClick={fetchData}>Get a Quote</Boton>
-    </Contenedor>
+    <Container className="page">
+      <section className="section section-center">
+        <div className="center">
+          <img className="img" src={logo} alt="logo" />
+          {content}
+          <button onClick={fetchData}>Get a Quote</button>
+        </div>
+      </section>
+    </Container>
   );
 }
 
 export default App;
 
-const Contenedor = styled.div`
-  display: flex;
-  align-items: center;
-  padding-top: 2rem;
-  flex-direction: column;
+const Container = styled.main`
   background: rgb(0, 125, 53);
-  background: linear-gradient(
-    0deg,
-    rgba(0, 125, 53, 1) 0%,
-    rgba(0, 125, 53, 1) 40%,
-    rgba(15, 87, 78, 1) 100%
-  );
-
-  @media (min-width: 992px) {
-    padding-top: 5rem;
-  }
-`;
-
-const Wrapper = styled.img`
-  width: 150px;
-  margin-top: -10px;
-  @media (min-width: 992px) {
-    margin-top: 0px;
-    width: 250px;
-  }
-`;
-
-const Boton = styled.button`
-  background: -webkit-linear-gradient(
-    top left,
-    #007d35 0%,
-    #007d35 40%,
-    #0f574e 100%
-  );
-  background-size: 300px;
-  font-family: Ariel, Helvetica, sans-serif;
-  color: #fff;
-  margin-top: 2rem;
-  margin-bottom: 0.5rem;
-  padding: 1rem 3rem;
-  font-size: 1.6rem;
-  border: 2px solid black;
-  transition: background-size 0.8s ease;
-  @media (min-width: 992px) {
-    font-size: 2rem;
+  .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
-  :hover {
-    cursor: pointer;
-    background-size: 400px;
+  img {
+    width: 200px;
+  }
+
+  button {
+    background: -webkit-linear-gradient(
+      top left,
+      #007d35 0%,
+      #007d35 40%,
+      #0f574e 100%
+    );
+    color: var(--white);
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    padding: 1rem 3rem;
+    font-size: 1.6rem;
+    border: 2px solid black;
+    transition: var(--transition);
+    &:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
   }
 `;
